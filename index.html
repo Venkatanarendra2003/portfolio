@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANCHURI VENKATA NARENDRA - Professional Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0V4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Font - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Original CSS styling for light theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light grey background */
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        .section-card {
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* More rounded corners */
+            padding: 2.5rem; /* Increased padding */
+            margin-bottom: 2.5rem; /* Increased margin */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0; /* Hidden by default for scroll animation */
+            transform: translateY(20px); /* Slightly down for slide-up effect */
+        }
+        .section-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-card:hover {
+            transform: translateY(-8px); /* More pronounced lift on hover */
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+        }
+        .section-title {
+            font-size: 2.8rem; /* Larger title */
+            font-weight: 800; /* Extra bold */
+            color: #2c3e50; /* Darker blue-grey for titles */
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background-color: #3498db; /* Blue underline */
+            border-radius: 5px;
+        }
+        .icon {
+            color: #3498db; /* Blue for icons */
+            margin-right: 1rem;
+            font-size: 2.2rem; /* Larger icons */
+        }
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+            padding: 0.85rem 2rem; /* Larger padding */
+            border-radius: 9999px; /* Pill-shaped button */
+            font-weight: 700;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+        .skill-badge {
+            background-color: #e0e7eb; /* Lighter grey */
+            color: #2c3e50;
+            padding: 0.6rem 1.2rem;
+            border-radius: 1.5rem; /* More rounded */
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-right: 0.8rem;
+            margin-bottom: 0.8rem;
+            display: inline-block;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .skill-badge:hover {
+            background-color: #cdd4d8;
+            transform: translateY(-2px);
+        }
+        .project-card {
+            background-color: #f8f9fa;
+            border-radius: 1.25rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .header-bg {
+            background: linear-gradient(135deg, #3498db 0%, #8e44ad 100%); /* Vibrant gradient */
+            color: white;
+            padding: 5rem 1.5rem 7rem; /* More padding for hero section */
+            text-align: center;
+            border-bottom-left-radius: 3rem; /* More pronounced curve */
+            border-bottom-right-radius: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden; /* For background animations */
+        }
+        /* Background animation for header */
+        .header-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: rotateBackground 20s linear infinite;
+        }
+        @keyframes rotateBackground {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-pic {
+            width: 180px; /* Larger profile picture */
+            height: 180px;
+            border-radius: 50%;
+            border: 6px solid white; /* Thicker border */
+            margin: 0 auto 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            object-fit: cover; /* Ensure image covers the area */
+            transition: transform 0.3s ease-in-out;
+        }
+        .profile-pic:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        /* Typing Effect */
+        .typing-text {
+            display: inline-block;
+            overflow: hidden; /* Ensures the cursor is visible */
+            white-space: nowrap; /* Keeps text on a single line */
+            border-right: 3px solid white; /* The blinking cursor */
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+            width: 0; /* Starts with 0 width */
+            font-weight: 500;
+        }
+
+        /* Typing animation */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* Blinking cursor animation */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white; }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            backdrop-filter: blur(5px); /* Blurred background */
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            max-width: 90%;
+            width: 700px; /* Max width for content */
+            animation: slideIn 0.3s ease-out;
+        }
+        .modal-close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+        }
+        .modal-close-btn:hover,
+        .modal-close-btn:focus {
+            color: #333;
+            text-decoration: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Scroll to Top Button */
+        #scrollToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, opacity 0.3s ease-in-out;
+            opacity: 0.8;
+        }
+        #scrollToTopBtn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            opacity: 1;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            padding: 1rem 0;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .navbar-link {
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            color: #555;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .navbar-link:hover {
+            background-color: #e0e7eb;
+            color: #3498db;
+        }
+        .navbar-link.active {
+            background-color: #3498db;
+            color: white;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            .section-card {
+                padding: 1.5rem;
+            }
+            .header-bg {
+                padding: 3rem 1rem 5rem;
+                border-bottom-left-radius: 2rem;
+                border-bottom-right-radius: 2rem;
+            }
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+            .modal-content {
+                padding: 1.5rem;
+            }
+            .navbar-link {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: none; /* Hidden by default */
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .ai-output-section {
+            background-color: #e0f2fe; /* Light blue for AI output */
+            border: 1px solid #90caf9; /* Medium blue for AI output border */
+        }
+        .ai-output-section p {
+            color: #1a202c; /* Dark text for AI output */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container flex flex-wrap justify-center md:justify-between items-center">
+            <a href="#hero" class="text-xl font-bold text-blue-700 hover:text-blue-900 transition-colors duration-200 mb-2 md:mb-0 navbar-link">A.V. NARENDRA</a>
+            <div class="flex flex-wrap justify-center space-x-2 md:space-x-4">
+                <a href="#about" class="navbar-link">About</a>
+                <a href="#education" class="navbar-link">Education</a>
+                <a href="#experience" class="navbar-link">Experience</a>
+                <a href="#projects" class="navbar-link">Projects</a>
+                <a href="#skills" class="navbar-link">Skills</a>
+                <a href="#certifications" class="navbar-link">Certifications</a>
+                <a href="#contact" class="navbar-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header/Hero Section -->
+    <header id="hero" class="header-bg">
+        <div class="container flex flex-col items-center relative z-10">
+            <img src="profile.jpg" alt="ANCHURI VENKATA NARENDRA" class="profile-pic" id="profilePic">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-shadow-lg">ANCHURI VENKATA NARENDRA</h1>
+            <p class="text-2xl md:text-3xl opacity-90 max-w-3xl text-center typing-text" id="tagline-text">
+                Detail-oriented IT professional | Full-Stack Developer | Cybersecurity Enthusiast
+            </p>
+            <div class="mt-8 flex space-x-4">
+                <a href="#projects" class="btn-primary">
+                    <i class="fas fa-code mr-2"></i> View My Work
+                </a>
+                <a href="#contact" class="btn-primary bg-purple-600 hover:bg-purple-700">
+                    <i class="fas fa-envelope mr-2"></i> Get In Touch
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- About Me Section -->
+        <section id="about" class="section-card">
+            <h2 class="section-title"><i class="fas fa-user icon"></i>About Me</h2>
+            <p class="text-lg leading-relaxed text-center md:text-left">
+                I am a **detail-oriented and self-motivated IT professional** currently in my final year at Andhra Loyola Institute of Engineering and Technology, pursuing a B.Tech in Information Technology. My expertise spans **full-stack application development**, **cybersecurity tools**, and **AI-driven solutions**. I am proficient in various development frameworks, databases, and languages, constantly seeking real-world applications for my technical skills. I thrive in collaborative environments and am eager to learn and grow within a dynamic team. My curiosity drives me to continuously explore new technologies and solve complex problems.
+            </p>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section-card">
+            <h2 class="section-title"><i class="fas fa-graduation-cap icon"></i>Education</h2>
+            <div class="space-y-4">
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-1">B.Tech in Information Technology</h3>
+                    <p class="text-gray-700 font-medium">Andhra Loyola Institute of Engineering and Technology</p>
+                    <p class="text-gray-600 text-sm">2022 - Present | CGPA: 6.0</p>
+                    <p class="text-gray-700 mt-2">Focused on core IT principles, software development, and emerging technologies, building a strong foundation for innovative solutions.</p>
+                </div>
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-1">Intermediate (MPC)</h3>
+                    <p class="text-gray-700 font-medium">Sri Chaitanya Junior College</p>
+                    <p class="text-gray-600 text-sm">2020 - 2022 | CGPA: 6.8</p>
+                    <p class="text-gray-700 mt-2">Developed strong analytical and problem-solving skills through a rigorous curriculum in Mathematics, Physics, and Chemistry.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Experience Section -->
+        <section id="experience" class="section-card">
+            <h2 class="section-title"><i class="fas fa-briefcase icon"></i>Professional Experience</h2>
+            <div class="space-y-6">
+                <!-- Cybersecurity Intern -->
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-1">Cybersecurity Intern</h3>
+                    <p class="text-gray-700 font-medium">SkillDzire - Private Limited | May 2024 - July 2024</p>
+                    <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                        <li>Conducted full-stack vulnerability assessments and simulated penetration testing to uncover potential entry points and security weaknesses.</li>
+                        <li>Worked with industry tools including Kali Linux for ethical hacking, Wireshark for network traffic analysis, and Nessus for vulnerability scanning.</li>
+                        <li>Participated in in-depth malware reverse engineering sessions, gaining insights into malware exploitation and detection.</li>
+                        <li>Advocated for the development and improvement of internal security policies, ensuring compliance with external authorities.</li>
+                        <li>Monitored live network logs and user behavior patterns for anomalies, supporting real-time threat reporting.</li>
+                        <li>Attended hands-on sessions on Cyber laws, ethical hacking tools & techniques, and incident response strategies.</li>
+                    </ul>
+                </div>
+                <!-- Full-Stack Web Development Intern -->
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-1">Full-Stack Web Development Intern</h3>
+                    <p class="text-gray-700 font-medium">Unified Mentor - Private Limited | May 2025 - July 2025</p>
+                    <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                        <li>Developed responsive full-stack web applications using HTML, CSS, JavaScript, and Firebase.</li>
+                        <li>Implemented small-scale projects such as a reservation system, an app for making appointments, and a countdown timer.</li>
+                        <li>Used Firebase for authentication, a real-time database, and backend integration.</li>
+                        <li>Worked together using Git/GitHub, followed the MVC architecture, and took part in code reviews.</li>
+                        <li>Learned how to use REST APIs, design user interfaces and experiences, and work in an agile way.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section-card">
+            <h2 class="section-title"><i class="fas fa-lightbulb icon"></i>Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Project 1: Ac Trip Genie -->
+                <div class="project-card project-clickable" data-project-id="trip-genie">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">Ac Trip Genie - AI-Powered Travel Recommendation Engine</h3>
+                    <p class="text-gray-700 mb-3 line-clamp-3">Built a travel plan project that generates itineraries based on user input (interest, location, budget). Leveraged ML and NLP for relevant suggestions and integrated Google Maps, Open Weather, and TripAdvisor APIs.</p>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <span class="skill-badge !bg-blue-100 !text-blue-800">React.js</span>
+                        <span class="skill-badge !bg-green-100 !text-green-800">Node.js</span>
+                        <span class="skill-badge !bg-purple-100 !text-purple-800">Flask</span>
+                        <span class="skill-badge !bg-red-100 !text-red-800">MongoDB</span>
+                    </div>
+                    <a href="https://github.com/Venkatanarendra2003/Trip-Genie" target="_blank" class="text-blue-600 hover:underline font-medium mt-4 block">View Project <i class="fas fa-external-link-alt text-sm ml-1"></i></a>
+                </div>
+                <!-- Project 2: Full-Stack Web Applications Suite -->
+                <div class="project-card project-clickable" data-project-id="full-stack-apps-suite">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">Full-Stack Web Applications Suite (Appointment, Reservation, Timer)</h3>
+                    <p class="text-gray-700 mb-3 line-clamp-3">Developed a collection of responsive full-stack web applications, including a **Student-Teacher Appointment System**, a reservation system, and a countdown timer. These projects demonstrate proficiency in HTML, CSS, JavaScript, and Firebase for robust authentication, real-time database management, and seamless backend integration.</p>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <span class="skill-badge !bg-yellow-100 !text-yellow-800">HTML</span>
+                        <span class="skill-badge !bg-blue-100 !text-blue-800">CSS</span>
+                        <span class="skill-badge !bg-orange-100 !text-orange-800">JavaScript</span>
+                        <span class="skill-badge !bg-indigo-100 !text-indigo-800">Firebase</span>
+                    </div>
+                    <a href="https://github.com/Venkatanarendra2003/student-teacher-appointment" target="_blank" class="text-blue-600 hover:underline font-medium mt-4 block">View Example Project <i class="fas fa-external-link-alt text-sm ml-1"></i></a>
+                </div>
+                <!-- Project 3: Cybersecurity Vulnerability Assessment (from SkillDzire) -->
+                <div class="project-card project-clickable" data-project-id="cybersecurity-assessment">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">Cybersecurity Vulnerability Assessment & Pen Testing</h3>
+                    <p class="text-gray-700 mb-3 line-clamp-3">Conducted comprehensive vulnerability assessments and simulated penetration tests using industry-standard tools like Kali Linux, Wireshark, and Nessus to identify and mitigate security weaknesses.</p>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <span class="skill-badge !bg-gray-100 !text-gray-800">Kali Linux</span>
+                        <span class="skill-badge !bg-red-100 !text-red-800">Wireshark</span>
+                        <span class="skill-badge !bg-purple-100 !text-purple-800">Nessus</span>
+                        <span class="skill-badge !bg-green-100 !text-green-800">Malware Analysis</span>
+                    </div>
+                    <a href="#" class="text-blue-600 hover:underline font-medium mt-4 block">Learn More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section-card">
+            <h2 class="section-title"><i class="fas fa-cogs icon"></i>Skills & Expertise</h2>
+            <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                <span class="skill-badge">Full-Stack Development</span>
+                <span class="skill-badge">Cybersecurity Vulnerability Assessment</span>
+                <span class="skill-badge">AI/ML Integration</span>
+                <span class="skill-badge">API Integration</span>
+                <span class="skill-badge">Responsive Web Design</span>
+                <span class="skill-badge">UI/UX Design</span>
+                <span class="skill-badge">Testing & Debugging</span>
+                <span class="skill-badge">Project Planning</span>
+                <span class="skill-badge">MVC Architecture</span>
+                <span class="skill-badge">Agile Methodologies</span>
+                <span class="skill-badge">Git & GitHub</span>
+                <span class="skill-badge">HTML</span>
+                <span class="skill-badge">CSS</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">React.js</span>
+                <span class="skill-badge">Node.js</span>
+                <span class="skill-badge">Flask</span>
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">MongoDB</span>
+                <span class="skill-badge">Firebase</span>
+                <span class="skill-badge">SQL</span>
+                <span class="skill-badge">MySQL</span>
+                <span class="skill-badge">Kali Linux</span>
+                <span class="skill-badge">Wireshark</span>
+                <span class="skill-badge">Nessus</span>
+                <span class="skill-badge">Jupyter Notebook</span>
+                <span class="skill-badge">REST APIs</span>
+                <span class="skill-badge">Attention to Detail</span>
+                <span class="skill-badge">Adaptability</span>
+                <span class="skill-badge">Analytical Thinking</span>
+                <span class="skill-badge">Time Management</span>
+                <span class="skill-badge">Curiosity</span>
+            </div>
+        </section>
+
+        <!-- Certifications & Workshops Section -->
+        <section id="certifications" class="section-card">
+            <h2 class="section-title"><i class="fas fa-certificate icon"></i>Certifications & Workshops</h2>
+            <div class="space-y-4">
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-1">Introduction to IoT - NPTEL Swayam (68%)</h3>
+                    <p class="text-gray-700">Gained foundational knowledge in Internet of Things concepts and applications.</p>
+                </div>
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-1">Artificial Intelligence - Infosys Springboard</h3>
+                    <p class="text-gray-700">Completed a comprehensive program on Artificial Intelligence, covering key concepts and practical applications.</p>
+                </div>
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-1">AWS Cloud Fundamentals - 1-week hands-on workshop</h3>
+                    <p class="text-gray-700">Acquired practical experience with core Amazon Web Services (AWS) functionalities and cloud concepts.</p>
+                </div>
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-1">Power BI - 3-day data visualization workshop</h3>
+                    <p class="text-gray-700">Developed skills in data visualization and business intelligence using Microsoft Power BI.</p>
+                </div>
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-1">Django Web Development - Practical application-based workshop</h3>
+                    <p class="text-gray-700">Learned to build web applications using the Django framework through hands-on practical exercises.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interests Section (New) -->
+        <section id="interests" class="section-card">
+            <h2 class="section-title"><i class="fas fa-heart icon"></i>Interests</h2>
+            <div class="flex flex-wrap justify-center md:justify-start gap-4 text-lg">
+                <span class="skill-badge !bg-pink-100 !text-pink-800"><i class="fas fa-utensils mr-2"></i>Exploring Cuisines</span>
+                <span class="skill-badge !bg-teal-100 !text-teal-800"><i class="fas fa-plane-departure mr-2"></i>Traveling Places</span>
+                <span class="skill-badge !bg-purple-100 !text-purple-800"><i class="fas fa-book-open mr-2"></i>Reading Non-Fiction & Self-Growth Books</span>
+                <span class="skill-badge !bg-orange-100 !text-orange-800"><i class="fas fa-camera-retro mr-2"></i>Photography</span>
+            </div>
+        </section>
+
+        <!-- Contact Information Section -->
+        <section id="contact" class="section-card text-center">
+            <h2 class="section-title"><i class="fas fa-envelope-open-text icon"></i>Let's Connect!</h2>
+            <p class="text-lg mb-8">I'm always eager to discuss new opportunities, exciting projects, or just share insights. Feel free to reach out!</p>
+            <div class="flex flex-col items-center space-y-5">
+                <a href="mailto:venkatanarendraanchuri@gmail.com" class="btn-primary flex items-center text-xl">
+                    <i class="fas fa-at mr-3"></i> venkatanarendraanchuri@gmail.com
+                </a>
+                <a href="tel:+918500349968" class="btn-primary flex items-center text-xl bg-green-500 hover:bg-green-600">
+                    <i class="fas fa-phone mr-3"></i> +91 85003 49968
+                </a>
+                <div class="flex space-x-6 mt-6">
+                    <a href="https://www.linkedin.com/in/A-Venkata-Narendra2003/" target="_blank" class="text-blue-700 hover:text-blue-900 text-4xl transition-colors duration-300">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/Venkatanarendra2003" target="_blank" class="text-gray-800 hover:text-gray-900 text-4xl transition-colors duration-300">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <!-- Add more social links if you have them, e.g., Twitter, personal website -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Project Details Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close-btn">&times;</span>
+            <h3 id="modalProjectTitle" class="text-3xl font-bold text-blue-800 mb-4"></h3>
+            <p id="modalProjectDescription" class="text-gray-800 text-lg mb-4"></p>
+            <p class="text-gray-700 font-semibold mb-2">Technologies Used:</p>
+            <div id="modalProjectTech" class="flex flex-wrap gap-2 mb-6"></div>
+            <button id="aiInsightBtn" class="btn-primary !py-3 !px-6 !text-lg bg-purple-600 hover:bg-purple-700 mb-4">
+                <i class="fas fa-magic mr-2"></i> ✨ AI Insight
+            </button>
+            <a id="modalProjectLink" href="#" target="_blank" class="btn-primary !py-3 !px-6 !text-lg">
+                <i class="fas fa-external-link-alt mr-2"></i> View Project
+            </a>
+            <div id="aiInsightOutput" class="mt-6 p-4 rounded-lg hidden ai-output-section">
+                <p class="font-semibold mb-2">AI-Generated Insight:</p>
+                <div class="loading-spinner" id="aiInsightSpinner"></div>
+                <p id="aiInsightText" class="text-gray-700"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer class="text-center text-gray-600 py-8 mt-10 border-t border-gray-200">
+        <p>&copy; 2025 ANCHURI VENKATA NARENDRA. All rights reserved. Crafted with passion and code! ✨</p>
+    </footer>
+
+    <script>
+        // JavaScript for interactivity and animations
+
+        // 1. Typing Effect for Tagline
+        const taglineText = document.getElementById('tagline-text');
+        const originalText = taglineText.textContent;
+        taglineText.textContent = ''; // Clear content initially
+
+        let charIndex = 0;
+        function typeWriter() {
+            if (charIndex < originalText.length) {
+                taglineText.textContent += originalText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 70); // Typing speed
+            } else {
+                // Optional: Remove blinking cursor after typing is complete
+                taglineText.style.borderRight = 'none';
+            }
+        }
+        // Start typing effect after a short delay
+        setTimeout(typeWriter, 1000);
+
+        // 2. Scroll-in Animations for Sections (Intersection Observer)
+        const sections = document.querySelectorAll('.section-card');
+        const observerOptions = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.1 // 10% of the section must be visible
+        };
+
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // 3. Project Modal Functionality
+        const projectModal = document.getElementById('projectModal');
+        const modalCloseBtn = document.querySelector('.modal-close-btn');
+        const modalProjectTitle = document.getElementById('modalProjectTitle');
+        const modalProjectDescription = document.getElementById('modalProjectDescription');
+        const modalProjectTech = document.getElementById('modalProjectTech');
+        const modalProjectLink = document.getElementById('modalProjectLink');
+        const aiInsightBtn = document.getElementById('aiInsightBtn');
+        const aiInsightOutput = document.getElementById('aiInsightOutput');
+        const aiInsightText = document.getElementById('aiInsightText');
+        const aiInsightSpinner = document.getElementById('aiInsightSpinner');
+
+
+        // Data for projects (can be expanded with more details and GitHub links)
+        const projectsData = {
+            'trip-genie': {
+                title: 'Ac Trip Genie - AI-Powered Travel Recommendation Engine',
+                description: 'This project is an AI-powered travel itinerary generator built to assist users in planning trips based on their interests, desired location, and budget. It leverages Machine Learning (ML) and Natural Language Processing (NLP) to analyze user behavior and provide highly relevant suggestions. The application integrates various APIs, including Google Maps for navigation and location data, Open Weather for real-time weather information, and TripAdvisor for reviews and points of interest. The user interface is designed to be highly responsive, ensuring a fluent interaction and allowing for extensive trip customization.',
+                tech: ['React.js', 'Node.js', 'Flask', 'MongoDB', 'Google APIs', 'ML', 'NLP'],
+                link: 'https://github.com/Venkatanarendra2003/Trip-Genie'
+            },
+            'full-stack-apps-suite': {
+                title: 'Full-Stack Web Applications Suite (Appointment, Reservation, Timer)',
+                description: 'Developed a collection of responsive full-stack web applications, including a Student-Teacher Appointment System, a reservation system, and a countdown timer. These projects demonstrate proficiency in HTML, CSS, JavaScript, and Firebase for robust authentication, real-time database management, and seamless backend integration. My work focused on creating intuitive user interfaces and ensuring cross-device compatibility.',
+                tech: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'REST APIs', 'MVC Architecture'],
+                link: 'https://github.com/Venkatanarendra2003/student-teacher-appointment' // Linking to the appointment system as an example
+            },
+            'cybersecurity-assessment': {
+                title: 'Cybersecurity Vulnerability Assessment & Pen Testing',
+                description: 'During my Cybersecurity Internship, I conducted comprehensive full-stack vulnerability assessments and simulated penetration tests. This involved examining system defenses in a controlled setting to uncover potential entry points and security weaknesses. I gained hands-on experience with industry-standard tools such as Kali Linux for ethical hacking, Wireshark for network traffic analysis, and Nessus for automated vulnerability scanning and discovery. My work contributed to real-time threat reporting and incident logging, and I participated in malware reverse engineering sessions to understand exploitation techniques.',
+                tech: ['Kali Linux', 'Wireshark', 'Nessus', 'Malware Analysis', 'Vulnerability Assessment', 'Penetration Testing'],
+                link: 'https://github.com/yourusername/cybersecurity-projects' // Replace with actual GitHub link
+            }
+        };
+
+        document.querySelectorAll('.project-clickable').forEach(card => {
+            card.addEventListener('click', (event) => {
+                // Prevent opening link if clicking on the "Learn More" link itself
+                if (event.target.tagName === 'A' || event.target.closest('a')) {
+                    return;
+                }
+                const projectId = card.dataset.projectId;
+                const project = projectsData[projectId];
+
+                if (project) {
+                    modalProjectTitle.textContent = project.title;
+                    modalProjectDescription.textContent = project.description;
+
+                    // Clear previous tech badges
+                    modalProjectTech.innerHTML = '';
+                    project.tech.forEach(tech => {
+                        const span = document.createElement('span');
+                        span.className = 'skill-badge !bg-gray-200 !text-gray-800'; // Neutral color for modal badges
+                        span.textContent = tech;
+                        modalProjectTech.appendChild(span);
+                    });
+
+                    modalProjectLink.href = project.link;
+                    projectModal.style.display = 'flex'; // Use flex to center
+
+                    // Reset AI Insight section
+                    aiInsightOutput.classList.add('hidden');
+                    aiInsightText.textContent = '';
+                    aiInsightSpinner.style.display = 'none';
+                    aiInsightBtn.dataset.projectId = projectId; // Store current project ID for AI insight
+                }
+            });
+        });
+
+        modalCloseBtn.addEventListener('click', () => {
+            projectModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside of the content
+        window.addEventListener('click', (event) => {
+            if (event.target == projectModal) {
+                projectModal.style.display = 'none';
+            }
+        });
+
+        // Gemini API Integration for AI Insight
+        aiInsightBtn.addEventListener('click', async () => {
+            const projectId = aiInsightBtn.dataset.projectId;
+            const project = projectsData[projectId];
+
+            if (!project) {
+                aiInsightText.textContent = 'Error: Project data not found.';
+                aiInsightOutput.classList.remove('hidden');
+                return;
+            }
+
+            aiInsightOutput.classList.remove('hidden');
+            aiInsightText.textContent = '';
+            aiInsightSpinner.style.display = 'block'; // Show spinner
+
+            const prompt = `Given the following project title and description, provide a concise, professional, and insightful elaboration. Focus on the project's impact, key challenges overcome, or its unique contribution. Keep it to 3-4 sentences.
+
+            Title: ${project.title}
+            Description: ${project.description}`;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // Canvas will automatically provide this
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            let retryCount = 0;
+            const maxRetries = 3;
+            const baseDelay = 1000; // 1 second
+
+            while (retryCount < maxRetries) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.status === 429) { // Too Many Requests
+                        const delay = baseDelay * Math.pow(2, retryCount);
+                        console.warn(`Rate limit hit. Retrying in ${delay / 1000} seconds...`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        retryCount++;
+                        continue;
+                    }
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        aiInsightText.textContent = text;
+                    } else {
+                        aiInsightText.textContent = 'Could not generate insight. Please try again.';
+                        console.error('Unexpected API response structure:', result);
+                    }
+                    break; // Exit loop on success
+                } catch (error) {
+                    aiInsightText.textContent = 'Error generating insight. Please check your connection.';
+                    console.error('Fetch error:', error);
+                    break; // Exit loop on critical error
+                } finally {
+                    aiInsightSpinner.style.display = 'none'; // Hide spinner
+                }
+            }
+
+            if (retryCount === maxRetries) {
+                aiInsightText.textContent = 'Failed to generate insight after multiple retries. Please try again later.';
+            }
+        });
+
+
+        // 4. Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        window.onscroll = function() { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        }
+
+        scrollToTopBtn.addEventListener('click', () => {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        });
+
+        // 5. Active Navigation Link on Scroll
+        const navLinks = document.querySelectorAll('.navbar-link');
+        const sectionsForNav = document.querySelectorAll('main section, header#hero'); // Include hero section
+
+        const navObserverOptions = {
+            root: null,
+            rootMargin: '-50% 0px -50% 0px', // Adjust this to make sections active when they are roughly in the middle of the viewport
+            threshold: 0 // No threshold needed with rootMargin
+        };
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.id;
+                const correspondingLink = document.querySelector(`.navbar-link[href="#${id}"]`);
+
+                if (correspondingLink) {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        correspondingLink.classList.add('active');
+                    }
+                }
+            });
+        }, navObserverOptions);
+
+        sectionsForNav.forEach(section => {
+            navObserver.observe(section);
+        });
+
+        // Initial active link check on page load
+        window.addEventListener('load', () => {
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                const initialSection = document.querySelector(currentHash);
+                if (initialSection) {
+                    initialSection.scrollIntoView({ behavior: 'smooth' });
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const targetLink = document.querySelector(`.navbar-link[href="${currentHash}"]`);
+                    if (targetLink) { // Added null check here
+                        targetLink.classList.add('active');
+                    }
+                }
+            } else {
+                // Default to 'hero' if no hash
+                const heroLink = document.querySelector('.navbar-link[href="#hero"]');
+                if (heroLink) { // Added null check here
+                    heroLink.classList.add('active');
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
